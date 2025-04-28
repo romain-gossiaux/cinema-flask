@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <div class="container">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="{{ url_for('accueil') }}">
+                        <img class="img-fluid" src="/static/images/logo.png" alt="Logo du cinéma" width="64">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'accueil' %} active {% endif %}" href="{{ url_for('accueil') }}">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'films' %} active {% endif %}" href="{{ url_for('films') }}">Films</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'seances' %} active {% endif %}" href="{{ url_for('seances') }}">Séances</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for film in films_a_l_affiche: %}
+    {% endfor %}
+    <div class="container mt-5">
+        <div class="text-center text-light">
+            <h1>Bienvenue au Cinéma</h1>
+            <p class="lead">Découvrez les derniers films, réservez vos places, vivez une expérience inoubliable.</p>
+            <a href="{{ url_for('films') }}" class="btn btn-warning btn-lg mt-3">Voir les films</a>
+        </div>
+        <hr class="my-5">
+        <h2 class="text-light mb-4">À l'affiche</h2>
+        <div class="row justify-content-center">
+            <div id="carouselFilmsAffiche" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner rounded shadow">
+                    {% for film in films_a_l_affiche: %}
+                        <div class="carousel-item {% if loop.first %} active {% endif %}">
+                            <div class="row g-4 align-items-center bg-dark text-white p-4 rounded">
+                                <div class="col-md-5 text-center">
+                                    <img src="/static/images/{{ film.affiche }}" class="img-fluid rounded shadow"
+                                         alt="Affiche de {{ film.affiche }}"
+                                         id="carousel-img">
+                                </div>
+                                <div class="col-md-7">
+                                    <h3 class="text-warning mb-3">{{ film.titre }}</h3>
+                                    <p><strong>Durée :</strong> {{ film.duree }} minutes</p>
+                                    <p><strong>Prochaine séance
+                                        :</strong> {{ film.date_heure.strftime('%d/%m/%Y à %H:%M') }}</p>
+                                    <a href="{{ url_for('seances') }}" class="btn btn-warning mt-3">Voir les séances</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselFilmsAffiche"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Précédent</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselFilmsAffiche"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Suivant</span>
+                </button>
+            </div>
+        </div>
+
+        <hr class="my-5">
+        <div class="next-seance-box my-4 p-3 bg-dark text-white rounded shadow">
+            <h4 class="mb-3">🎬 Prochaine Séance</h4>
+            <div class="d-flex align-items-center">
+                <img src="/static/images/{{ next_seance.affiche }}" alt="Affiche de {{ next_seance.titre }}"
+                     class="me-3 next-seance-img">
+                <div>
+                    <h5 class="next-seance-title">{{ next_seance.titre }}</h5>
+                    <p><strong>Date :</strong> {{ next_seance.date_heure }}</p>
+                    <a href="{{ url_for('seances') }}" class="btn btn-warning btn-sm mt-2 next-seance-btn">Voir les
+                        séances</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
